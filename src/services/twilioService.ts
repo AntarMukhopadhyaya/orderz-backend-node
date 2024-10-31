@@ -1,29 +1,6 @@
 import { Twilio } from "twilio";
 
-// const accountSid = process.env.TWILIO_ACCOUNT_SID || "";
 
-// const authToken = process.env.TWILIO_AUTH_TOKEN || "";
-// const twilioNumber = process.env.TWILIO_WHATSAPP_NUMBER || "";
-// const client = new Twilio(accountSid,authToken);
-
-// /**
-//  * Send a whatsapp message using Twilio API
-//  * @param to- Recipent Whatsapp number in the format "whatsapp:+<country code><phone number>"
-//  * @param message- Text message to be sent
-//  */
-// export const sendWhatsappMessage = async(to:string,message:string):Promise<void>  => {
-//     try {
-//         const response = await client.messages.create ({
-//             body: message,
-//             from: twilioNumber,
-//             to: to
-//         });
-//         console.log(`Message sent to ${to} with sid ${response.sid}`);
-//     }catch(error){
-//         console.error(`Error sending message to ${to}`,error);
-//     }
-
-// }
 
 class TwilioService {
     private client: Twilio;
@@ -33,7 +10,7 @@ class TwilioService {
     constructor(){
         this.client = new Twilio(process.env.TWILIO_ACCOUNT_SID!, process.env.TWILIO_AUTH_TOKEN!);
         this.whatsappNumber = process.env.TWILIO_WHATSAPP_NUMBER!;
-        this.contentSid = process.env.TWILIO_WHATSAPP_TEMPLATE_SID!;
+        this.contentSid = process.env.CONTENT_SID!;
     }
     /**
      * Send a whatsapp message using Twilio API

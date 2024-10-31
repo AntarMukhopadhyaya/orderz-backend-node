@@ -3,6 +3,8 @@ import twilioService from "../services/twilioService";
 import MessagingResponse from "twilio/lib/twiml/MessagingResponse";
 
 export const sendMessage = async (req: Request, res: Response) => {
+    console.log(req)
+    console.log("Request Body:", req.body);
   const incomingQuestion = req.body.Body?.toLowerCase();
   const senderNumber = req.body.From;
 
@@ -23,10 +25,7 @@ export const sendMessage = async (req: Request, res: Response) => {
 
 
   try {
-    await twilioService.sendWhatsAppMessage(senderNumber, answer, {
-      "1": "Alu_Potel",
-      "2": "potol",
-    });
+    await twilioService.sendWhatsAppMessage(senderNumber, answer, {});
     res.set("Content-Type", "application/xml");
     res.send(botResponse.toString());
   } catch (error) {
@@ -34,15 +33,5 @@ export const sendMessage = async (req: Request, res: Response) => {
     res.status(500).json({ error: "Error sending message" });
   }
 
-  // const {to, message} = req.body;
-  // if(!to || !message){
-  //     res.status(400).json({error:'Missing "to" or "message" fields'});
-  //     return;
-  // }
-  // try {
-  //     await sendWhatsappMessage(to,message);
-  //     res.status(200).json({success:'Message sent successfully'});
-  // }catch(error){
-  //     res.status(500).json({error:'Error sending message'});
-  // }
+
 };
